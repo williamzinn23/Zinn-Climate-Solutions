@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zinn Climate Solutions</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #0f1f3d;
+      --navy-mid: #1a3260;
+      --copper: #b5722a;
+      --copper-light: #d4903e;
+      --cream: #f5f0e8;
+      --white: #ffffff;
+      --gray: #6b7280;
+      --light: #f9f7f4;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--white);
+      color: var(--navy);
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem 5%;
+      background: rgba(15, 31, 61, 0.96);
+      backdrop-filter: blur(8px);
+    }
+
+    .logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.35rem;
+      color: var(--white);
+      letter-spacing: 0.01em;
+      white-space: nowrap;
+    }
+    .logo span { color: var(--copper-light); }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 2.5rem;
+    }
+    nav ul a {
+      text-decoration: none;
+      color: rgba(255,255,255,0.75);
+      font-size: 0.875rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    nav ul a:hover { color: var(--copper-light); }
+
+    .nav-cta {
+      background: var(--copper);
+      color: var(--white) !important;
+      padding: 0.55rem 1.25rem;
+      border-radius: 4px;
+      transition: background 0.2s !important;
+    }
+    .nav-cta:hover { background: var(--copper-light) !important; color: var(--white) !important; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      background: var(--navy);
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      padding: 7rem 5% 4rem;
+    }
+
+    .hero-grid {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 1280px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 60% at 80% 50%, rgba(181,114,42,0.15) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 40% at 20% 80%, rgba(26,50,96,0.8) 0%, transparent 60%);
+    }
+
+    /* Subtle grid lines */
+    .hero-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 680px;
+      animation: fadeUp 0.9s ease both;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--copper-light);
+      border: 1px solid rgba(181,114,42,0.4);
+      padding: 0.35rem 0.85rem;
+      border-radius: 2px;
+      margin-bottom: 1.75rem;
+    }
+
+    .hero h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2.6rem, 5vw, 4rem);
+      line-height: 1.1;
+      color: var(--white);
+      margin-bottom: 1.5rem;
+    }
+    .hero h1 em {
+      font-style: italic;
+      color: var(--copper-light);
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.65);
+      margin-bottom: 2.5rem;
+      max-width: 520px;
+      font-weight: 300;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .hero-trust {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem 1.4rem;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.6);
+      font-weight: 400;
+    }
+    .hero-trust span {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .hero-trust span::before {
+      content: '✓';
+      color: var(--copper-light);
+      font-weight: 700;
+    }
+
+    .btn-primary {
+      background: var(--copper);
+      color: var(--white);
+      padding: 0.85rem 2rem;
+      border: none;
+      border-radius: 4px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+      display: inline-block;
+    }
+    .btn-primary:hover { background: var(--copper-light); transform: translateY(-2px); }
+
+    .btn-secondary {
+      background: transparent;
+      color: rgba(255,255,255,0.8);
+      padding: 0.85rem 2rem;
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 4px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+      transition: border-color 0.2s, color 0.2s;
+      display: inline-block;
+    }
+    .btn-secondary:hover { border-color: var(--copper-light); color: var(--copper-light); }
+
+    /* ── HERO VISUAL ── */
+    .hero-visual {
+      position: relative;
+      animation: fadeUp 0.9s 0.15s ease both;
+    }
+
+    .comfort-card {
+      position: relative;
+      background: linear-gradient(160deg, rgba(255,255,255,0.09), rgba(255,255,255,0.03));
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 22px;
+      padding: 1.85rem;
+      backdrop-filter: blur(14px);
+      box-shadow: 0 36px 70px -24px rgba(0,0,0,0.65);
+    }
+
+    .comfort-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.5rem;
+    }
+    .comfort-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.72);
+      letter-spacing: 0.02em;
+    }
+    .comfort-status i {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: #5fcf80;
+      animation: pulse 2.4s infinite;
+    }
+    .comfort-mode {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--copper-light);
+      border: 1px solid rgba(212,144,62,0.45);
+      padding: 0.22rem 0.6rem;
+      border-radius: 50px;
+    }
+
+    .dial {
+      position: relative;
+      width: 230px;
+      max-width: 70%;
+      aspect-ratio: 1;
+      margin: 0.75rem auto;
+    }
+    .dial svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+    .dial-track { fill: none; stroke: rgba(255,255,255,0.09); stroke-width: 13; }
+    .dial-fill {
+      fill: none;
+      stroke: url(#dialGrad);
+      stroke-width: 13;
+      stroke-linecap: round;
+      stroke-dasharray: 528;
+      stroke-dashoffset: 528;
+      animation: dialFill 1.7s 0.5s cubic-bezier(0.2,0.8,0.2,1) forwards;
+    }
+    @keyframes dialFill { to { stroke-dashoffset: 150; } }
+    .dial-center {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .dial-temp {
+      font-family: 'DM Serif Display', serif;
+      font-size: 3.1rem;
+      color: var(--white);
+      line-height: 1;
+    }
+    .dial-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--copper-light);
+      margin-top: 0.45rem;
+    }
+
+    .comfort-foot {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      text-align: center;
+    }
+    .comfort-foot strong {
+      display: block;
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.15rem;
+      color: var(--white);
+    }
+    .comfort-foot span {
+      font-size: 0.68rem;
+      color: rgba(255,255,255,0.5);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .float-badge {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      max-width: 230px;
+      background: rgba(13,26,52,0.9);
+      border: 1px solid rgba(255,255,255,0.13);
+      backdrop-filter: blur(10px);
+      border-radius: 14px;
+      padding: 0.75rem 1rem;
+      box-shadow: 0 18px 40px -14px rgba(0,0,0,0.6);
+    }
+    .fb-icon {
+      width: 36px; height: 36px;
+      flex-shrink: 0;
+      border-radius: 10px;
+      background: rgba(181,114,42,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .fb-icon svg { width: 19px; height: 19px; fill: none; stroke: var(--copper-light); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .float-badge strong { display: block; font-size: 0.85rem; color: var(--white); line-height: 1.25; }
+    .float-badge span { display: block; font-size: 0.72rem; color: rgba(255,255,255,0.58); line-height: 1.3; margin-top: 0.1rem; }
+    .badge-1 {
+      top: -1.15rem; right: -1.15rem;
+      animation: fadeUp 0.9s 0.55s ease both, floaty 5.5s 1.5s ease-in-out infinite;
+    }
+    .badge-2 {
+      bottom: -1.35rem; left: -1.45rem;
+      animation: fadeUp 0.9s 0.75s ease both, floaty 6.5s 1.8s ease-in-out infinite;
+    }
+    @keyframes floaty { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
+    @keyframes pulse {
+      0%   { box-shadow: 0 0 0 0 rgba(95,207,128,0.5); }
+      70%  { box-shadow: 0 0 0 8px rgba(95,207,128,0); }
+      100% { box-shadow: 0 0 0 0 rgba(95,207,128,0); }
+    }
+
+    /* ── EMERGENCY BANNER ── */
+    .stats-bar {
+      background: var(--cream);
+      border-top: 3px solid var(--copper);
+      padding: 2rem 5%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem 2.5rem;
+      flex-wrap: wrap;
+      text-align: center;
+    }
+
+    .emergency-copy {
+      display: flex;
+      align-items: baseline;
+      gap: 0.85rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .emergency-badge {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.9rem;
+      color: var(--navy);
+      line-height: 1;
+    }
+    .emergency-text {
+      font-size: 1rem;
+      color: var(--navy);
+      font-weight: 500;
+    }
+    .emergency-text strong {
+      color: var(--copper);
+      font-weight: 600;
+    }
+    .btn-call {
+      background: var(--navy);
+      color: var(--white);
+      padding: 0.7rem 1.6rem;
+      border-radius: 4px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-call:hover { background: var(--copper); transform: translateY(-2px); }
+
+    /* ── SERVICES ── */
+    .services {
+      padding: 6rem 5%;
+      background: var(--white);
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+    .section-tag {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--copper);
+      display: block;
+      margin-bottom: 0.75rem;
+    }
+    .section-header h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.75rem);
+      color: var(--navy);
+      line-height: 1.2;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 2rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .service-card {
+      padding: 2.25rem;
+      border: 1px solid #e5e0d8;
+      border-radius: 6px;
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--copper);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s;
+    }
+    .service-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(15,31,61,0.1); border-color: var(--copper); }
+    .service-card:hover::before { transform: scaleX(1); }
+
+    .service-icon {
+      font-size: 2rem;
+      margin-bottom: 1.25rem;
+      display: block;
+    }
+    .service-card h3 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.3rem;
+      color: var(--navy);
+      margin-bottom: 0.75rem;
+    }
+    .service-card p {
+      font-size: 0.9rem;
+      line-height: 1.65;
+      color: var(--gray);
+      margin-bottom: 1.25rem;
+    }
+    .service-link {
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      color: var(--copper);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: gap 0.2s, color 0.2s;
+    }
+    .service-link:hover { color: var(--copper-light); gap: 0.7rem; }
+
+    /* ── ABOUT ── */
+    .about {
+      padding: 6rem 5%;
+      background: var(--light);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .about-text .section-tag { text-align: left; }
+    .about-text h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.8rem, 3vw, 2.5rem);
+      color: var(--navy);
+      margin-bottom: 1.25rem;
+      line-height: 1.2;
+    }
+    .about-text p {
+      font-size: 0.975rem;
+      line-height: 1.8;
+      color: var(--gray);
+      margin-bottom: 1rem;
+    }
+
+    .about-image {
+      background: var(--navy);
+      border-radius: 8px;
+      height: 380px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .about-image::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 30% 70%, rgba(181,114,42,0.3), transparent 60%);
+    }
+    .about-placeholder {
+      font-size: 5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── CONTACT ── */
+    .contact {
+      padding: 6rem 5%;
+      background: var(--navy);
+      text-align: center;
+    }
+    .contact .section-tag { color: var(--copper-light); }
+    .contact h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.75rem);
+      color: var(--white);
+      margin-bottom: 1rem;
+    }
+    .contact p {
+      color: rgba(255,255,255,0.6);
+      font-size: 1rem;
+      margin-bottom: 2.5rem;
+      font-weight: 300;
+    }
+
+    .contact-form {
+      max-width: 540px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .contact-form input,
+    .contact-form textarea {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 4px;
+      padding: 0.85rem 1.1rem;
+      color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      transition: border-color 0.2s;
+      resize: none;
+    }
+    .contact-form input::placeholder,
+    .contact-form textarea::placeholder { color: rgba(255,255,255,0.35); }
+    .contact-form input:focus,
+    .contact-form textarea:focus { outline: none; border-color: var(--copper-light); }
+
+    .contact-details {
+      max-width: 540px;
+      margin: 2.5rem auto 0;
+      display: flex;
+      justify-content: center;
+      gap: 2.5rem;
+      flex-wrap: wrap;
+    }
+    .contact-details a {
+      color: rgba(255,255,255,0.8);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      transition: color 0.2s;
+    }
+    .contact-details a:hover { color: var(--copper-light); }
+
+    .form-success {
+      max-width: 540px;
+      margin: 0 auto;
+      background: rgba(181,114,42,0.12);
+      border: 1px solid rgba(212,144,62,0.4);
+      border-radius: 6px;
+      padding: 2.5rem 2rem;
+      color: var(--white);
+    }
+    .form-success h3 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.5rem;
+      margin-bottom: 0.75rem;
+      color: var(--white);
+    }
+    .form-success p { color: rgba(255,255,255,0.7); margin: 0; }
+
+    /* ── FLOATING CALL (mobile) ── */
+    .floating-call {
+      display: none;
+      position: fixed;
+      bottom: 1.1rem;
+      right: 1.1rem;
+      z-index: 200;
+      background: var(--copper);
+      color: var(--white);
+      padding: 0.85rem 1.4rem;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+      box-shadow: 0 8px 24px rgba(15,31,61,0.35);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #080f1e;
+      padding: 2rem 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    footer .logo { font-size: 1.1rem; }
+    footer p {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.35);
+    }
+
+    /* ── ANIMATION ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .hero { padding: 6.5rem 5% 3.5rem; }
+      .hero-grid { grid-template-columns: 1fr; gap: 3.5rem; }
+      .hero-content { max-width: none; }
+      .hero-visual { max-width: 360px; margin: 0 auto; width: 100%; }
+    }
+
+    @media (max-width: 768px) {
+      nav ul { display: none; }
+      .logo { font-size: 1.2rem; }
+      .float-badge { display: none; }
+      .about { grid-template-columns: 1fr; gap: 2.5rem; padding: 4rem 5%; }
+      .about-image { height: 240px; }
+      .stats-bar { gap: 1.25rem; }
+      .floating-call { display: inline-block; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="logo">Zinn <span>Climate</span> Solutions</div>
+    <ul>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact" class="nav-cta">Get a Quote</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-grid">
+      <div class="hero-content">
+        <span class="hero-tag">Charlotte & Raleigh, NC</span>
+        <h1>Comfortable Home,<br><em>Same Day.</em></h1>
+        <p>Heating or cooling acting up? A local technician can be at your door fast — with upfront pricing and a fix that lasts. No surprises, no pressure.</p>
+        <div class="hero-buttons">
+          <a href="#contact" class="btn-primary">Get My Free Quote</a>
+          <a href="tel:+13132045813" class="btn-secondary">Call (313) 204-5813</a>
+        </div>
+        <div class="hero-trust">
+          <span>Same-day service</span>
+          <span>Upfront pricing</span>
+          <span>Locally owned</span>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="comfort-card">
+          <div class="comfort-head">
+            <span class="comfort-status"><i></i> System running smoothly</span>
+            <span class="comfort-mode">Cooling</span>
+          </div>
+          <div class="dial">
+            <svg viewBox="0 0 200 200" aria-hidden="true">
+              <defs>
+                <linearGradient id="dialGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#d4903e" />
+                  <stop offset="100%" stop-color="#b5722a" />
+                </linearGradient>
+              </defs>
+              <circle class="dial-track" cx="100" cy="100" r="84" />
+              <circle class="dial-fill" cx="100" cy="100" r="84" />
+            </svg>
+            <div class="dial-center">
+              <span class="dial-temp">72°</span>
+              <span class="dial-label">Just right</span>
+            </div>
+          </div>
+          <div class="comfort-foot">
+            <div><strong>38%</strong><span>Humidity</span></div>
+            <div><strong>Quiet</strong><span>Fan</span></div>
+            <div><strong>Clean</strong><span>Air</span></div>
+          </div>
+        </div>
+
+        <div class="float-badge badge-1">
+          <span class="fb-icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8z" /></svg>
+          </span>
+          <div>
+            <strong>Same-day arrival</strong>
+            <span>Often at your door within hours</span>
+          </div>
+        </div>
+
+        <div class="float-badge badge-2">
+          <span class="fb-icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 4 6v6c0 5 3.4 7.7 8 9 4.6-1.3 8-4 8-9V6l-8-3z" /><path d="m9 12 2 2 4-4" /></svg>
+          </span>
+          <div>
+            <strong>Upfront, honest pricing</strong>
+            <span>The price we quote is what you pay</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EMERGENCY BANNER -->
+  <div class="stats-bar">
+    <div class="emergency-copy">
+      <span class="emergency-badge">24/7</span>
+      <span class="emergency-text"><strong>Emergency service, day or night.</strong> No heat or no cooling? We answer when you need us most.</span>
+    </div>
+    <a href="tel:+13132045813" class="btn-call">Call Now</a>
+  </div>
+
+  <!-- SERVICES -->
+  <section class="services" id="services">
+    <div class="section-header">
+      <span class="section-tag">What We Do</span>
+      <h2>Full-Service Climate Solutions</h2>
+    </div>
+    <div class="services-grid">
+      <div class="service-card">
+        <span class="service-icon">❄️</span>
+        <h3>AC Installation & Repair</h3>
+        <p>Beat the heat without the wait. We get your home cool again fast — and help you avoid the next breakdown — with upfront pricing and no guesswork.</p>
+        <a href="#contact" class="service-link">Get a free quote →</a>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">🔥</span>
+        <h3>Heating Systems</h3>
+        <p>Never wake up to a cold house again. From furnaces to heat pumps, we restore reliable warmth quickly — same-day when the temperature drops.</p>
+        <a href="#contact" class="service-link">Get a free quote →</a>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">🌬️</span>
+        <h3>Indoor Air Quality</h3>
+        <p>Breathe easier in every room. Cut down on dust, allergens, and dryness with air purification and humidity solutions sized to your home and budget.</p>
+        <a href="#contact" class="service-link">Get a free quote →</a>
+      </div>
+      <div class="service-card">
+        <span class="service-icon">🔧</span>
+        <h3>Maintenance Plans</h3>
+        <p>Stop breakdowns before they start. Seasonal tune-ups keep your system running efficiently, lower your energy bills, and add years to your equipment.</p>
+        <a href="#contact" class="service-link">Get a free quote →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="about">
+      <div class="about-image">
+        <span class="about-placeholder">🏠</span>
+      </div>
+      <div class="about-text">
+        <span class="section-tag">Who We Are</span>
+        <h2>Local Roots, Professional Standards</h2>
+        <p>We're a family-owned HVAC company that has served the Carolinas for over two decades. Our team brings the responsiveness of a neighbor with the expertise of a seasoned professional.</p>
+        <p>We believe comfort shouldn't come with surprises — every job comes with transparent pricing and honest, dependable service.</p>
+        <a href="#contact" class="btn-primary" style="margin-top: 1rem;">Talk to Us</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <span class="section-tag">Get in Touch</span>
+    <h2>Get Your Free Quote</h2>
+    <p>Tell us what's going on and we'll get back to you within one business day — no obligation, no pressure.</p>
+    <form class="contact-form" id="quote-form" name="quote" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="quote" />
+      <p style="display:none">
+        <label>Don't fill this out: <input name="bot-field" /></label>
+      </p>
+      <input type="text" name="name" placeholder="Your Name" required />
+      <input type="email" name="email" placeholder="Email Address" required />
+      <input type="tel" name="phone" placeholder="Phone Number" required />
+      <textarea name="message" rows="4" placeholder="What can we help with? (e.g. AC not cooling, furnace tune-up)"></textarea>
+      <button type="submit" class="btn-primary">Request My Free Quote</button>
+    </form>
+    <div class="form-success" id="form-success" style="display:none">
+      <h3>Thanks — we've got it.</h3>
+      <p>Your request is in. We'll reach out within one business day. Need help sooner? Call us anytime at <a href="tel:+13132045813" style="color:var(--copper-light)">313-204-5813</a>.</p>
+    </div>
+    <div class="contact-details">
+      <a href="mailto:william.m.zinn@gmail.com">william.m.zinn@gmail.com</a>
+      <a href="tel:+13132045813">313-204-5813</a>
+    </div>
+  </section>
+
+  <!-- FLOATING CALL (mobile) -->
+  <a href="tel:+13132045813" class="floating-call">📞 Call Now</a>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="logo">Zinn <span>Climate</span> Solutions</div>
+    <p>© 2026 Zinn Climate Solutions. All rights reserved.</p>
+  </footer>
+  <script>
+    const quoteForm = document.getElementById('quote-form');
+    quoteForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = quoteForm.querySelector('button[type="submit"]');
+      btn.disabled = true;
+      btn.textContent = 'Sending...';
+      try {
+        await fetch('/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: new URLSearchParams(new FormData(quoteForm)).toString(),
+        });
+        quoteForm.style.display = 'none';
+        document.getElementById('form-success').style.display = 'block';
+      } catch (err) {
+        btn.disabled = false;
+        btn.textContent = 'Request My Free Quote';
+        alert("Something went wrong. Please call us at 313-204-5813 and we'll help right away.");
+      }
+    });
+  </script>
+
+</body>
+</html>
